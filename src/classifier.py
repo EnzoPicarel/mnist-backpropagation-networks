@@ -10,9 +10,9 @@ from src.training import squared_errors
 
 
 DEFAULT_CANDIDATES = [
-    {"hidden": [120], "epochs": 150, "learning_rate": 1.0, "momentum": 0.9},
-    {"hidden": [160], "epochs": 150, "learning_rate": 2.0, "momentum": 0.9},
-    {"hidden": [200], "epochs": 150, "learning_rate": 1.0, "momentum": 0.9},
+    {"hidden": [120], "epochs": 150, "learning_rate": 0.18, "momentum": 0.9},
+    {"hidden": [160], "epochs": 150, "learning_rate": 0.12, "momentum": 0.9},
+    {"hidden": [200], "epochs": 150, "learning_rate": 0.06, "momentum": 0.9},
 ]
 
 
@@ -47,7 +47,7 @@ def main():
     parser.add_argument("--output", required=True)
     parser.add_argument("--hidden", nargs="+", type=int, help="Use this architecture without tuning.")
     parser.add_argument("--epochs", type=int, default=150)
-    parser.add_argument("--learning-rate", type=float, default=1.0)
+    parser.add_argument("--learning-rate", type=float, default=0.12)
     parser.add_argument("--momentum", type=float, default=0.9)
     args = parser.parse_args()
     out = destination(args.output)
