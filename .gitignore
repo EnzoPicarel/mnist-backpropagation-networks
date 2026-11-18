@@ -1,2 +1,5 @@
 /data/mnist/*_images.txt
 /data/mnist/*_labels.txt
+/.venv/
+/results/
+__pycache__/
