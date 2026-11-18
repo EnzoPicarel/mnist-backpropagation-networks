@@ -26,6 +26,9 @@ def write_csv(path, rows):
 
 def run(inputs, targets, config, evaluate, multiply=np.matmul):
     model = Network([inputs.shape[1], *config["hidden"], targets.shape[1]], seed=SEED)
+    if "output_prior" in config:
+        prior = config["output_prior"]
+        model.biases[-1].fill(np.log(prior / (1 - prior)))
     history = train(model, inputs, targets, config["epochs"], BATCH_SIZE,
                     config["learning_rate"], config["momentum"], SEED, evaluate, multiply)
     return model, history

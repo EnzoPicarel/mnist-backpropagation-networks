@@ -9,11 +9,13 @@ from src.experiment import BATCH_SIZE, SEED, destination, run, tune, write_csv, 
 from src.training import squared_errors
 
 
+OUTPUT_PRIOR = 0.1
 DEFAULT_CANDIDATES = [
-    {"hidden": [120], "epochs": 150, "learning_rate": 0.18, "momentum": 0.9},
-    {"hidden": [160], "epochs": 150, "learning_rate": 0.12, "momentum": 0.9},
-    {"hidden": [200], "epochs": 150, "learning_rate": 0.06, "momentum": 0.9},
+    {"hidden": [width], "epochs": 200, "learning_rate": rate, "momentum": 0.9,
+     "output_prior": OUTPUT_PRIOR}
+    for width, rate in [(120, 0.08), (160, 0.14), (200, 0.20)]
 ]
+
 
 
 def targets(digits):
@@ -46,8 +48,8 @@ def main():
     parser.add_argument("--data", default="data/mnist")
     parser.add_argument("--output", required=True)
     parser.add_argument("--hidden", nargs="+", type=int, help="Use this architecture without tuning.")
-    parser.add_argument("--epochs", type=int, default=150)
-    parser.add_argument("--learning-rate", type=float, default=0.12)
+    parser.add_argument("--epochs", type=int, default=200)
+    parser.add_argument("--learning-rate", type=float, default=0.14)
     parser.add_argument("--momentum", type=float, default=0.9)
     args = parser.parse_args()
     out = destination(args.output)
@@ -62,7 +64,7 @@ def main():
         write_json(out / "validation.json", records)
     else:
         config = {"hidden": args.hidden, "epochs": args.epochs,
-                  "learning_rate": args.learning_rate, "momentum": args.momentum}
+                  "learning_rate": args.learning_rate, "momentum": args.momentum, "output_prior": OUTPUT_PRIOR}
 
     test = load_split(args.data, "test", 100)
     if np.intersect1d(training.indices, test.indices).size:
