@@ -97,6 +97,18 @@ Reconstruction error is half the sum of squared pixel differences per image,
 averaged over the split. These results describe the fixed 1,000-image test
 split, with 100 examples per digit.
 
+### Autoencoder Reconstructions
+
+![Five MNIST inputs and their reconstructions. The final column compares a 90-degree rotation of the same digit 8, whose reconstruction error increases from 1.44 to 2.30.](assets/mnist-reconstructions.png)
+
+The top row shows the inputs and the bottom row shows the model outputs. In the
+last column, the same 8 is rotated 90° counterclockwise. Its reconstruction
+error rises from **1.44** to **2.30** in this illustrative example.
+
+Figure adapted from the [public MNIST test set](https://keras.io/api/datasets/mnist/)
+by Yann LeCun and Corinna Cortes. The figure includes a rotation and model
+reconstructions and is licensed under [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/).
+
 ### CPU and ROCm Benchmark
 
 Median time for one epoch plus a forward pass over 4,000 images, with FP32,
